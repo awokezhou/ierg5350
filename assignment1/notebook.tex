@@ -1,0 +1,1532 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{IERG 5350 Assignment 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{IERG 5350 Assignment 1: Tabular Reinforcement
+Learning}\label{ierg-5350-assignment-1-tabular-reinforcement-learning}
+
+\emph{2020-2021 Term 1, IERG 5350: Reinforcement Learning. Department of
+Information Engineering, The Chinese University of Hong Kong. Course
+Instructor: Professor ZHOU Bolei. Assignment author: PENG Zhenghao, SUN
+Hao, ZHAN Xiaohang.}
+
+    \begin{longtable}[]{@{}cc@{}}
+\toprule
+Student Name & Student ID\tabularnewline
+\midrule
+\endhead
+Yang YU & 1155149722\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Welcome to the assignment 1 of our RL course. The objective of this
+assignment is for you to understand the classic methods used in tabular
+reinforcement learning.
+
+This assignment has the following sections:
+
+\begin{itemize}
+\tightlist
+\item
+  Section 1: Warm-up on the RL environment (35 points)
+\item
+  Section 2: Implementation of model-based family of algorithms: policy
+  iteration and value iteration. (65 points)
+\end{itemize}
+
+You need to go through this self-contained notebook, which contains
+\textbf{21 TODOs} in part of the cells and has special
+\texttt{{[}TODO{]}} signs. You need to finish all TODOs. Some of them
+may be easy such as uncommenting a line, some of them may be difficult
+such as implementing a function. You can find them by searching the
+\texttt{{[}TODO{]}} symbol. However, we suggest you to go through the
+documents step by step, which will give you a better sense of the
+content.
+
+You are encouraged to add more code on extra cells at the end of the
+each section to investigate the problems you think interesting. At the
+end of the file, we left a place for you to optionaly write comments
+(Yes, please give us some either negative or positive rewards so we can
+keep improving the assignment!).
+
+Please report any code bugs to us via \textbf{github issues}.
+
+Before you get start, remember to follow the instruction at
+https://github.com/cuhkrlcourse/ierg5350-assignment to setup your
+environment.
+
+    Now start running the cells sequentially (by \texttt{ctrl\ +\ enter} or
+\texttt{shift\ +\ enter}) to avoid unnecessary errors by skipping some
+cells.
+
+\subsection{Section 1: Warm-up on the RL
+environment}\label{section-1-warm-up-on-the-rl-environment}
+
+(35/100 points)
+
+In this section, we will go through the basic concepts of RL
+environments using OpenAI Gym. Besides, you will get the first sense of
+the toy environment we will use in the rest of the assignment.
+
+Every Gym environment should contain the following attributes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{env.step(action)} To step the environment by applying
+  \texttt{action}. Will return four things:
+  \texttt{observation,\ reward,\ done,\ info}, wherein \texttt{done} is
+  a boolean value indicating whether this \textbf{episode} is finished.
+  \texttt{info} may contain some information the user is interested in,
+  we do not use it.
+\item
+  \texttt{env.reset()} To reset the environment, back to the initial
+  state. Will return the initial observation.
+\item
+  \texttt{env.render()} To render the current state of the environment
+  for human-being
+\item
+  \texttt{env.action\_space} The allowed action format. In our case, it
+  is \texttt{Discrete(4)} which means the action is an integer in the
+  range {[}0, 1, 2, 3{]}. Therefore the \texttt{action} for
+  \texttt{step(action)} should obey the limit of the action space.
+\item
+  \texttt{env.observation\_space} The observation space.
+\item
+  \texttt{env.seed(seed)} To set the random seed of the environment. So
+  the result is replicable.
+\end{enumerate}
+
+Note that the word \textbf{episode} means the process that an agent
+interacts with the environment from the initial state to the terminal
+state. Within one episode, the agent will only receive one
+\texttt{done=True}, when it goes to the terminal state (the agent is
+dead or the game is over).
+
+We will use "FrozenLake8x8-v0" as our environment. In this environment,
+the agent controls the movement of a character in a grid world. Some
+tiles of the grid are walkable, and others lead to the agent falling
+into the water. Additionally, the movement direction of the agent is
+uncertain and only partially depends on the chosen direction. The agent
+is rewarded for finding a walkable path to a goal tile. The meaning of
+each character:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  S : starting point, safe
+\item
+  F : frozen surface, safe
+\item
+  H : hole, fall to your doom
+\item
+  G : goal, where the frisbee is located
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+        
+        \PY{c+c1}{\PYZsh{} Import some packages that we need to use}
+        \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{gym}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{deque}
+\end{Verbatim}
+
+
+    \subsubsection{Section 1.1: Make the
+environment}\label{section-1.1-make-the-environment}
+
+You need to know
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How to make an environment
+\item
+  How to set the random seed of environment
+\item
+  What is observation space and action space
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+        
+        \PY{c+c1}{\PYZsh{} [TODO] Just a reminder. Do you add your name and student }
+        \PY{c+c1}{\PYZsh{} ID in the table at top of the notebook?}
+        \PY{k}{pass}
+        
+        \PY{c+c1}{\PYZsh{} Create the environment}
+        \PY{n}{env} \PY{o}{=} \PY{n}{gym}\PY{o}{.}\PY{n}{make}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} You need to reset the environment immediately after instantiating env. }
+        \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} [TODO] uncomment this line}
+        
+        \PY{c+c1}{\PYZsh{} Seed the environment}
+        \PY{n}{env}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}  \PY{c+c1}{\PYZsh{} [TODO] uncomment this line}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current observation space: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current action space: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0 in action space? }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5 in action space? }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Current observation space: Discrete(64)
+Current action space: Discrete(4)
+0 in action space? True
+5 in action space? False
+
+    \end{Verbatim}
+
+    \subsubsection{Section 1.2: Play the environment with random
+actions}\label{section-1.2-play-the-environment-with-random-actions}
+
+You need to know
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How to step the environment
+\item
+  How to render the environment
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+        
+        \PY{c+c1}{\PYZsh{} Run 1000 steps for test, terminate if done.}
+        \PY{c+c1}{\PYZsh{} You can run this cell multiples times.}
+        \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} take random action}
+            \PY{c+c1}{\PYZsh{} [TODO] Uncomment next line}
+            \PY{n}{obs}\PY{p}{,} \PY{n}{reward}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} render the environment}
+            \PY{n}{env}\PY{o}{.}\PY{n}{render}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} [TODO] Uncomment this line}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current observation: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Current reward: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Whether we are done: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{info: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                \PY{n}{obs}\PY{p}{,} \PY{n}{reward}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info}
+            \PY{p}{)}\PY{p}{)}
+            \PY{n}{wait}\PY{p}{(}\PY{n}{sleep}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} [TODO] terminate the loop if done}
+            \PY{k}{if} \PY{n}{done}\PY{p}{:}
+                \PY{k}{break}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  (Down)
+SFFFFFFF
+FFFFFFFF
+FFF\setlength{\fboxsep}{0pt}\colorbox{ansi-red}{H\strut}FFFF
+FFFFFHFF
+FFFHFFFF
+FHHFFFHF
+FHFFHFHF
+FFFHFFFG
+Current observation: 19
+Current reward: 0.0
+Whether we are done: True
+info: \{'prob': 0.3333333333333333\}
+
+    \end{Verbatim}
+
+    \subsubsection{Section 1.3: Define the evaluation function to value the
+random
+baseline}\label{section-1.3-define-the-evaluation-function-to-value-the-random-baseline}
+
+Now we need to define an evaluation function to evaluate a given policy
+(a function where the input is observation and the output is action).
+This is convenient for future evaluation.
+
+As a reminder, you should create a \texttt{FrozenLake8x8-v0} environment
+instance by default, reset it after each episode (and at the beginning),
+step the environment, and terminate episode if done.
+
+After implementing the \texttt{evaluate} function, run the next cell to
+check whether you are right.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+        
+        \PY{k}{def} \PY{n+nf}{\PYZus{}render\PYZus{}helper}\PY{p}{(}\PY{n}{env}\PY{p}{)}\PY{p}{:}
+            \PY{n}{env}\PY{o}{.}\PY{n}{render}\PY{p}{(}\PY{p}{)}
+            \PY{n}{wait}\PY{p}{(}\PY{n}{sleep}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n}{policy}\PY{p}{,} \PY{n}{num\PYZus{}episodes}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{render}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}[TODO] You need to implement this function by yourself. It}
+        \PY{l+s+sd}{    evaluate the given policy and return the mean episode reward.}
+        \PY{l+s+sd}{    We use `seed` argument for testing purpose.}
+        \PY{l+s+sd}{    You should pass the tests in the next cell.}
+        
+        \PY{l+s+sd}{    :param policy: a function whose input is an interger (observation)}
+        \PY{l+s+sd}{    :param num\PYZus{}episodes: number of episodes you wish to run}
+        \PY{l+s+sd}{    :param seed: an interger, used for testing.}
+        \PY{l+s+sd}{    :param env\PYZus{}name: the name of the environment}
+        \PY{l+s+sd}{    :param render: a boolean flag. If true, please call \PYZus{}render\PYZus{}helper}
+        \PY{l+s+sd}{    function.}
+        \PY{l+s+sd}{    :return: the averaged episode reward of the given policy.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{} Create environment (according to env\PYZus{}name, we will use env other than \PYZsq{}FrozenLake8x8\PYZhy{}v0\PYZsq{})}
+            \PY{n}{env} \PY{o}{=} \PY{n}{gym}\PY{o}{.}\PY{n}{make}\PY{p}{(}\PY{n}{env\PYZus{}name}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Seed the environment}
+            \PY{n}{env}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Build inner loop to run.}
+            \PY{c+c1}{\PYZsh{} For each episode, do not set the limit.}
+            \PY{c+c1}{\PYZsh{} Only terminate episode (reset environment) when done = True.}
+            \PY{c+c1}{\PYZsh{} The episode reward is the sum of all rewards happen within one episode.}
+            \PY{c+c1}{\PYZsh{} Call the helper function `render(env)` to render}
+            \PY{n}{rewards} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}episodes}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} reset the environment}
+                \PY{n}{obs} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+                \PY{n}{act} \PY{o}{=} \PY{n}{policy}\PY{p}{(}\PY{n}{obs}\PY{p}{)}
+                
+                \PY{n}{ep\PYZus{}reward} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} [TODO] run the environment and terminate it if done, collect the}
+                    \PY{c+c1}{\PYZsh{} reward at each step and sum them to the episode reward.}
+                    \PY{n}{obs}\PY{p}{,} \PY{n}{reward}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{n}{act}\PY{p}{)}
+                    \PY{n}{ep\PYZus{}reward} \PY{o}{+}\PY{o}{=} \PY{n}{reward}
+                    \PY{n}{act} \PY{o}{=} \PY{n}{policy}\PY{p}{(}\PY{n}{obs}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{render}\PY{p}{:}
+                        \PY{n}{\PYZus{}render\PYZus{}helper}\PY{p}{(}\PY{n}{env}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{done}\PY{p}{:}
+                        \PY{k}{break}
+                
+                \PY{n}{rewards}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ep\PYZus{}reward}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{rewards}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} [TODO] Run next cell to test your implementation!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+        
+        \PY{c+c1}{\PYZsh{} Run this cell to test the correctness of your implementation of `evaluate`.}
+        \PY{n}{LEFT} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{DOWN} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{RIGHT} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{UP} \PY{o}{=} \PY{l+m+mi}{3}
+        
+        \PY{k}{def} \PY{n+nf}{expert}\PY{p}{(}\PY{n}{obs}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Go down if agent at the right edge, otherwise go right.\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{return} \PY{n}{DOWN} \PY{k}{if} \PY{p}{(}\PY{n}{obs} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{8} \PY{o}{==} \PY{l+m+mi}{0} \PY{k}{else} \PY{n}{RIGHT}
+        
+        \PY{k}{def} \PY{n+nf}{assert\PYZus{}equal}\PY{p}{(}\PY{n}{seed}\PY{p}{,} \PY{n}{value}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ret} \PY{o}{=} \PY{n}{evaluate}\PY{p}{(}\PY{n}{expert}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{seed}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{n}{env\PYZus{}name}\PY{p}{)}
+            \PY{k}{assert} \PY{n}{ret} \PY{o}{==} \PY{n}{value}\PY{p}{,} \PYZbs{}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{When evaluate on seed }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, 1000 episodes, in }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ environment, the }\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{averaged reward should be }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. But you get }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{seed}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{p}{,} \PY{n}{value}\PY{p}{,} \PY{n}{ret}\PY{p}{)}
+              
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.065}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.059}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{0.055}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.026}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.034}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{assert\PYZus{}equal}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{0.028}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Passed!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{As a baseline, the mean episode reward of a hand\PYZhy{}craft }\PY{l+s+s2}{\PYZdq{}}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{agent is: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{evaluate}\PY{p}{(}\PY{n}{expert}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Passed!
+
+As a baseline, the mean episode reward of a hand-craft agent is:  0.065
+
+    \end{Verbatim}
+
+    Congraduation! You have finished section 1 (if and only if not error
+happen at the above codes).
+
+If you want to do more investigation, feel free to open new cells via
+\texttt{Esc\ +\ B} after the next cells and write codes in it, so that
+you can reuse some result in this notebook. Remember to write sufficient
+comments and documents to let others know what you are doing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} You can do more inverstigation here if you wish. Leave it blank if you don\PYZsq{}t.}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Section 2: Model-based Tabular
+RL}\label{section-2-model-based-tabular-rl}
+
+(65/100 points)
+
+We have learned how to use the Gym environment to run an episode, as
+well as how to interact between the agent (policy) and environment via
+\texttt{env.step(action)} to collect observation, reward, done, and
+possible extra information.
+
+Now we need to build the basic tabular RL algorithm to solve this
+environment. \textbf{Note that compared to the model-free methods in the
+Sec.3, the algorithms in this section needs to access the internal
+information of the environment, namely the transition dynamics}. In our
+case, given a state and an action, we need to know which state current
+environment would jump to, and the probability of this happens, and the
+reward if the transition happens. You will see that we provide you a
+helper function \texttt{trainer.\_get\_transitions(state,\ action)} that
+takes state and action as input and return you a list of possible
+transitions.
+
+You will use a class to represent a Trainer, which seems to be
+over-complex for tabular RL. But we will use the same framework in the
+future assignments, or even in your future research. So it would be
+helpful for you to get familiar with how to implement an RL algorithm in
+a class-orientetd programming style, as a first step toward the
+implementation of state of the art RL algorithm in the future.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+        
+        \PY{k}{class} \PY{n+nc}{TabularRLTrainerAbstract}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This is the abstract class for tabular RL trainer. We will inherent the specify }
+        \PY{l+s+sd}{    algorithm\PYZsq{}s trainer from this abstract class, so that we can reuse the codes like}
+        \PY{l+s+sd}{    getting the dynamic of the environment (self.\PYZus{}get\PYZus{}transitions()) or rendering the}
+        \PY{l+s+sd}{    learned policy (self.render()).\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{model\PYZus{}based}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env\PYZus{}name} \PY{o}{=} \PY{n}{env\PYZus{}name}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env} \PY{o}{=} \PY{n}{gym}\PY{o}{.}\PY{n}{make}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env\PYZus{}name}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{action\PYZus{}dim} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{model\PYZus{}based} \PY{o}{=} \PY{n}{model\PYZus{}based}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}transitions}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{state}\PY{p}{,} \PY{n}{act}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Query the environment to get the transition probability,}
+        \PY{l+s+sd}{        reward, the next state, and done given a pair of state and action.}
+        \PY{l+s+sd}{        We implement this function for you. But you need to know the }
+        \PY{l+s+sd}{        return format of this function.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}check\PYZus{}env\PYZus{}name}\PY{p}{(}\PY{p}{)}
+                \PY{k}{assert} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{model\PYZus{}based}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You should not use \PYZus{}get\PYZus{}transitions in }\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZhy{}free algorithm!}\PY{l+s+s2}{\PYZdq{}}
+                
+                \PY{c+c1}{\PYZsh{} call the internal attribute of the environments.}
+                \PY{c+c1}{\PYZsh{} `transitions` is a list contain all possible next states and the }
+                \PY{c+c1}{\PYZsh{} probability, reward, and termination indicater corresponding to it}
+                \PY{n}{transitions} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env}\PY{o}{.}\PY{n}{env}\PY{o}{.}\PY{n}{P}\PY{p}{[}\PY{n}{state}\PY{p}{]}\PY{p}{[}\PY{n}{act}\PY{p}{]}
+        
+                \PY{c+c1}{\PYZsh{} Given a certain state and action pair, it is possible}
+                \PY{c+c1}{\PYZsh{} to find there exist multiple transitions, since the }
+                \PY{c+c1}{\PYZsh{} environment is not deterministic.}
+                \PY{c+c1}{\PYZsh{} You need to know the return format of this function: a list of dicts}
+                \PY{n}{ret} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{prob}\PY{p}{,} \PY{n}{next\PYZus{}state}\PY{p}{,} \PY{n}{reward}\PY{p}{,} \PY{n}{done} \PY{o+ow}{in} \PY{n}{transitions}\PY{p}{:}
+                    \PY{n}{ret}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{\PYZob{}}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prob}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{prob}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{next\PYZus{}state}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{next\PYZus{}state}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reward}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{reward}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{done}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{done}
+                    \PY{p}{\PYZcb{}}\PY{p}{)}
+                \PY{k}{return} \PY{n}{ret}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}check\PYZus{}env\PYZus{}name}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env\PYZus{}name}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{print\PYZus{}table}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}print beautiful table, only work for FrozenLake8X8\PYZhy{}v0 env. We }
+        \PY{l+s+sd}{        write this function for you.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}check\PYZus{}env\PYZus{}name}\PY{p}{(}\PY{p}{)}
+                \PY{n}{print\PYZus{}table}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Conduct one iteration of learning.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{k}{raise} \PY{n+ne}{NotImplementedError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You need to override the }\PY{l+s+s2}{\PYZdq{}}
+                                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trainer.train() function.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Use the function you write to evaluate current policy.}
+        \PY{l+s+sd}{        Return the mean episode reward of 1000 episodes when seed=0.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{result} \PY{o}{=} \PY{n}{evaluate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env\PYZus{}name}\PY{p}{)}
+                \PY{k}{return} \PY{n}{result}
+        
+            \PY{k}{def} \PY{n+nf}{render}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Reuse your evaluate function, render current policy }
+        \PY{l+s+sd}{        for one episode when seed=0\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{evaluate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{render}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Section 2.1: Policy
+Iteration}\label{section-2.1-policy-iteration}
+
+Recall the idea of policy iteration:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Update the state value function, given all possible transitions in the
+  environment.
+\item
+  Find the best policy that makes the most out of the current state
+  value function.
+\item
+  If the best policy is identical to the previous one then stop the
+  training. Otherwise, go to step 1.
+\end{enumerate}
+
+In step 1, the way to update the state value function is by
+
+\[v_{k+1} = E_{s'}[r(s, a)+\gamma v_{k}(s')]\]
+
+wherein the \(a\) is given by current policy, \(s'\) is next state,
+\(r\) is the reward, \(v_{k}(s')\) is the next state value given by the
+old (not updated yet) value function. The expectation is computed among
+all possible transitions (given a state and action pair, it is possible
+to have many different next states, since the environment is not
+deterministic).
+
+In step 2, the best policy is to take the action with maximum expected
+return given a state:
+
+\[a = {argmax}_a E_{s'}[r(s, a) + \gamma v_{k}(s')]\]
+
+Policy iteration algorithm has an outer loop (update policy, step 1 to
+3) and an inner loop (fit the value function, within step 1). In each
+outer loop, we call once \texttt{trainer.train()}, where we call
+\texttt{trainer.update\_value\_function()} once to update the value
+function (the state value table). After that we call
+\texttt{trainer.update\_policy()} to update the current policy.
+\texttt{trainer} object has a \texttt{trainer.policy} attribute, which
+is a function that takes observation as input and returns an action.
+
+You should implement the trainer following the framework we already
+wrote for you. Please carefully go through the codes and finish all
+\texttt{TODO} in it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+        
+        \PY{k}{class} \PY{n+nc}{PolicyItertaionTrainer}\PY{p}{(}\PY{n}{TabularRLTrainerAbstract}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{eps}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{super}\PY{p}{(}\PY{n}{PolicyItertaionTrainer}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{env\PYZus{}name}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} discount factor}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{=} \PY{n}{gamma}
+        
+                \PY{c+c1}{\PYZsh{} value function convergence criterion}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eps} \PY{o}{=} \PY{n}{eps}
+        
+                \PY{c+c1}{\PYZsh{} build the value table for each possible observation}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} [TODO] you need to implement a random policy at the beginning.}
+                \PY{c+c1}{\PYZsh{} It is a function that take an integer (state or say observation)}
+                \PY{c+c1}{\PYZsh{} as input and return an interger (action).}
+                \PY{c+c1}{\PYZsh{} remember, you can use self.action\PYZus{}dim to get the dimension (range)}
+                \PY{c+c1}{\PYZsh{} of the action, which is an integer in range}
+                \PY{c+c1}{\PYZsh{} [0, ..., self.action\PYZus{}dim \PYZhy{} 1]}
+                \PY{c+c1}{\PYZsh{} hint: generating random action at each call of policy may lead to}
+                \PY{c+c1}{\PYZsh{}  failure of convergence, try generate random actions at initializtion}
+                \PY{c+c1}{\PYZsh{}  and fix it during the training.}
+                \PY{k}{def} \PY{n+nf}{random\PYZus{}policy}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{obs2pol} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                    
+                    \PY{k}{def} \PY{n+nf}{rp}\PY{p}{(}\PY{n}{obs}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{obs} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{obs2pol}\PY{p}{:}
+                            \PY{n}{obs2pol}\PY{p}{[}\PY{n}{obs}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{action\PYZus{}dim}\PY{p}{)}
+                        \PY{k}{return} \PY{n}{obs2pol}\PY{p}{[}\PY{n}{obs}\PY{p}{]}
+                    
+                    \PY{k}{return} \PY{n}{rp}   
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy} \PY{o}{=} \PY{n}{random\PYZus{}policy}\PY{p}{(}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} test your random policy}
+                \PY{n}{test\PYZus{}random\PYZus{}policy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{env}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Conduct one iteration of learning.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} [TODO] value function may be need to be reset to zeros.}
+                \PY{c+c1}{\PYZsh{} if you think it should, than do it. If not, then move on.}
+                \PY{c+c1}{\PYZsh{} hint: the value function is equivalent to self.table,}
+                \PY{c+c1}{\PYZsh{}  a numpy array with length 64.}
+                \PY{k}{pass}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}value\PYZus{}function}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}policy}\PY{p}{(}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{update\PYZus{}value\PYZus{}function}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}  \PY{c+c1}{\PYZsh{} count the steps of value updates}
+                \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                    \PY{n}{old\PYZus{}table} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+                    \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{act} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy}\PY{p}{(}\PY{n}{state}\PY{p}{)}
+                        \PY{n}{transition\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}transitions}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{act}\PY{p}{)}
+                        
+                        \PY{n}{state\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{k}{for} \PY{n}{transition} \PY{o+ow}{in} \PY{n}{transition\PYZus{}list}\PY{p}{:}
+                            \PY{n}{prob} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{reward} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{next\PYZus{}state} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{next\PYZus{}state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{done} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{done}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            
+                            \PY{c+c1}{\PYZsh{} [TODO] what is the right state value?}
+                            \PY{c+c1}{\PYZsh{} hint: you should use reward, self.gamma, old\PYZus{}table, prob,}
+                            \PY{c+c1}{\PYZsh{} and next\PYZus{}state to compute the state value}
+                            \PY{n}{state\PYZus{}value} \PY{o}{+}\PY{o}{=} \PY{n}{prob} \PY{o}{*} \PY{p}{(}\PY{n}{reward} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{*} \PY{n}{old\PYZus{}table}\PY{p}{[}\PY{n}{next\PYZus{}state}\PY{p}{]}\PY{p}{)}
+        
+                        \PY{c+c1}{\PYZsh{} update the state value}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{p}{[}\PY{n}{state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}value}
+        
+                    \PY{c+c1}{\PYZsh{} [TODO] Compare the old\PYZus{}table and current table to}
+                    \PY{c+c1}{\PYZsh{}  decide whether to break the value update process.}
+                    \PY{c+c1}{\PYZsh{} hint: you should use self.eps, old\PYZus{}table and self.table}
+                    \PY{n}{equal\PYZus{}or\PYZus{}not} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{fabs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table} \PY{o}{\PYZhy{}} \PY{n}{old\PYZus{}table}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eps}\PY{p}{)}
+                    \PY{n}{should\PYZus{}break} \PY{o}{=} \PY{n+nb}{all}\PY{p}{(}\PY{n}{equal\PYZus{}or\PYZus{}not}\PY{p}{)}
+        
+                    \PY{k}{if} \PY{n}{should\PYZus{}break}\PY{p}{:}
+                        \PY{k}{break}
+                    \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{if} \PY{n}{count} \PY{o}{\PYZpc{}} \PY{l+m+mi}{200} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{} disable this part if you think debug message annoying.}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[DEBUG]}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Updated values for }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ steps. }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Difference between new and old table is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                            \PY{n}{count}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{old\PYZus{}table} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{p}{)}\PY{p}{)}
+                        \PY{p}{)}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{count} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4000}\PY{p}{:}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[HINT] Are you sure your codes is OK? It shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t be }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so hard to update the value function. You already }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{use }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ steps to update value function within }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{single iteration.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{count}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{count} \PY{o}{\PYZgt{}} \PY{l+m+mi}{6000}\PY{p}{:}
+                        \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clearly your code has problem. Check it!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{update\PYZus{}policy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}You need to define a new policy function, given current}
+        \PY{l+s+sd}{        value function. The best action for a given state is the one that}
+        \PY{l+s+sd}{        has greatest expected return.}
+        
+        \PY{l+s+sd}{        To optimize computing efficiency, we introduce a policy table,}
+        \PY{l+s+sd}{        which take state as index and return the action given a state.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{policy\PYZus{}table} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{,} \PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{state\PYZus{}action\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{action\PYZus{}dim}
+        
+                    \PY{c+c1}{\PYZsh{} [TODO] assign the action with greatest \PYZdq{}value\PYZdq{}}
+                    \PY{c+c1}{\PYZsh{} to policy\PYZus{}table[state]}
+                    \PY{c+c1}{\PYZsh{} hint: what is the proper \PYZdq{}value\PYZdq{} here?}
+                    \PY{c+c1}{\PYZsh{}  you should use table, gamma, reward, prob,}
+                    \PY{c+c1}{\PYZsh{}  next\PYZus{}state and self.\PYZus{}get\PYZus{}transitions() function}
+                    \PY{c+c1}{\PYZsh{}  as what we done at self.update\PYZus{}value\PYZus{}function()}
+                    \PY{c+c1}{\PYZsh{}  Bellman equation may help.}
+                    \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{action\PYZus{}dim}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{transition\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}transitions}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{action}\PY{p}{)}
+                        \PY{n}{state\PYZus{}action\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{k}{for} \PY{n}{transition} \PY{o+ow}{in} \PY{n}{transition\PYZus{}list}\PY{p}{:}
+                            \PY{n}{prob} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{reward} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{next\PYZus{}state} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{next\PYZus{}state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{done} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{done}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{state\PYZus{}action\PYZus{}value} \PY{o}{+}\PY{o}{=} \PY{n}{prob} \PY{o}{*} \PY{p}{(}\PY{n}{reward} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{p}{[}\PY{n}{next\PYZus{}state}\PY{p}{]}\PY{p}{)}
+                        
+                        \PY{n}{state\PYZus{}action\PYZus{}values}\PY{p}{[}\PY{n}{action}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}action\PYZus{}value}
+                    \PY{n}{best\PYZus{}action} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{state\PYZus{}action\PYZus{}values}\PY{p}{)}
+                    
+                    \PY{n}{policy\PYZus{}table}\PY{p}{[}\PY{n}{state}\PY{p}{]} \PY{o}{=} \PY{n}{best\PYZus{}action}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{policy} \PY{o}{=} \PY{k}{lambda} \PY{n}{obs}\PY{p}{:} \PY{n}{policy\PYZus{}table}\PY{p}{[}\PY{n}{obs}\PY{p}{]}
+\end{Verbatim}
+
+
+    Now we have built the Trainer class for policy iteration algorithm. In
+the following few cells, we will train the agent to solve the problem
+and evaluate its performance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+        
+        \PY{c+c1}{\PYZsh{} Managing configurations of your experiments is important for your research.}
+        \PY{n}{default\PYZus{}pi\PYZus{}config} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+            \PY{n}{max\PYZus{}iteration}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,}
+            \PY{n}{evaluate\PYZus{}interval}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+            \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,}
+            \PY{n}{eps}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}
+        \PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{policy\PYZus{}iteration}\PY{p}{(}\PY{n}{train\PYZus{}config}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+            \PY{n}{config} \PY{o}{=} \PY{n}{default\PYZus{}pi\PYZus{}config}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{k}{if} \PY{n}{train\PYZus{}config} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                \PY{n}{config}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{train\PYZus{}config}\PY{p}{)}
+                
+            \PY{n}{trainer} \PY{o}{=} \PY{n}{PolicyItertaionTrainer}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{eps}\PY{o}{=}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+            \PY{n}{old\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{p}{\PYZob{}}
+                \PY{n}{obs}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{obs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}
+            \PY{p}{\PYZcb{}}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} train the agent}
+                \PY{n}{trainer}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} [TODO] please uncomment this line}
+        
+                \PY{c+c1}{\PYZsh{} [TODO] compare the new policy with old policy to check whether}
+                \PY{c+c1}{\PYZsh{}  should we stop. If new and old policy have same output given any}
+                \PY{c+c1}{\PYZsh{}  observation, them we consider the algorithm is converged and}
+                \PY{c+c1}{\PYZsh{}  should be stopped.}
+                \PY{n}{new\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{obs}\PY{p}{:} \PY{n}{trainer}\PY{o}{.}\PY{n}{policy}\PY{p}{(}\PY{n}{obs}\PY{p}{)} \PY{k}{for} \PY{n}{obs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}\PY{p}{\PYZcb{}}
+                \PY{n}{should\PYZus{}stop} \PY{o}{=} \PY{p}{(}\PY{n}{old\PYZus{}policy\PYZus{}result} \PY{o}{==} \PY{n}{new\PYZus{}policy\PYZus{}result}\PY{p}{)}
+                
+                \PY{k}{if} \PY{n}{should\PYZus{}stop}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{We found policy is not changed anymore at }\PY{l+s+s2}{\PYZdq{}}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{itertaion }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Current mean episode reward }\PY{l+s+s2}{\PYZdq{}}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Stop training.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{break}
+                \PY{n}{old\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{n}{new\PYZus{}policy\PYZus{}result}
+        
+                \PY{c+c1}{\PYZsh{} evaluate the result}
+                \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{evaluate\PYZus{}interval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[INFO]}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{In }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ iteration, current mean episode reward is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{20}\PY{p}{:}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You sure your codes is OK? It shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t take so many }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{) iterations to train a policy iteration }\PY{l+s+s2}{\PYZdq{}}
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{agent.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{assert} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.8}\PY{p}{,} \PYZbs{}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{We expect to get the mean episode reward greater than 0.8. }\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{But you get: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Please check your codes.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{trainer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{c+c1}{\PYZsh{} It may be confusing to call a trainer agent. But that\PYZsq{}s what we normally do.}
+         \PY{n}{pi\PYZus{}agent} \PY{o}{=} \PY{n}{policy\PYZus{}iteration}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 7.392568313812104e-08
+[INFO]	In 0 iteration, current mean episode reward is 0.11.
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 0.029429602728247073
+[DEBUG]	Updated values for 400 steps. Difference between new and old table is: 0.004438961223939879
+[DEBUG]	Updated values for 600 steps. Difference between new and old table is: 0.0008469308878798626
+[DEBUG]	Updated values for 800 steps. Difference between new and old table is: 0.00017486836179392284
+[DEBUG]	Updated values for 1000 steps. Difference between new and old table is: 3.689135840563573e-05
+[DEBUG]	Updated values for 1200 steps. Difference between new and old table is: 7.825806935556068e-06
+[DEBUG]	Updated values for 1400 steps. Difference between new and old table is: 1.6623971247770042e-06
+[DEBUG]	Updated values for 1600 steps. Difference between new and old table is: 3.5325712000044973e-07
+[DEBUG]	Updated values for 1800 steps. Difference between new and old table is: 7.507316130556108e-08
+[DEBUG]	Updated values for 2000 steps. Difference between new and old table is: 1.595467246512383e-08
+[DEBUG]	Updated values for 2200 steps. Difference between new and old table is: 3.390732264407781e-09
+[INFO]	In 1 iteration, current mean episode reward is 0.472.
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 0.0005347401179493366
+[DEBUG]	Updated values for 400 steps. Difference between new and old table is: 1.2036897030498483e-06
+[DEBUG]	Updated values for 600 steps. Difference between new and old table is: 2.5418130517040893e-09
+[INFO]	In 2 iteration, current mean episode reward is 0.855.
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 0.001043612767784599
+[DEBUG]	Updated values for 400 steps. Difference between new and old table is: 4.646412705228142e-06
+[DEBUG]	Updated values for 600 steps. Difference between new and old table is: 2.0729784236395155e-08
+[INFO]	In 3 iteration, current mean episode reward is 0.77.
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 0.0005513925924638952
+[DEBUG]	Updated values for 400 steps. Difference between new and old table is: 1.860067316943048e-05
+[DEBUG]	Updated values for 600 steps. Difference between new and old table is: 5.266762296285421e-07
+[DEBUG]	Updated values for 800 steps. Difference between new and old table is: 1.3714513066864775e-08
+[INFO]	In 4 iteration, current mean episode reward is 0.688.
+[DEBUG]	Updated values for 200 steps. Difference between new and old table is: 0.00019132884081538015
+[DEBUG]	Updated values for 400 steps. Difference between new and old table is: 1.8012094348110463e-05
+[DEBUG]	Updated values for 600 steps. Difference between new and old table is: 1.3738230361104442e-06
+[DEBUG]	Updated values for 800 steps. Difference between new and old table is: 9.513478366196537e-08
+[DEBUG]	Updated values for 1000 steps. Difference between new and old table is: 6.230830934539355e-09
+[INFO]	In 5 iteration, current mean episode reward is 0.829.
+[INFO]	In 6 iteration, current mean episode reward is 0.867.
+We found policy is not changed anymore at itertaion 7. Current mean episode reward is 0.867. Stop training.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Your policy iteration agent achieve }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ mean episode reward. The optimal score }\PY{l+s+s2}{\PYZdq{}}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should be almost }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{pi\PYZus{}agent}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.86}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your policy iteration agent achieve 0.867 mean episode reward. The optimal score should be almost 0.86.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n}{pi\PYZus{}agent}\PY{o}{.}\PY{n}{render}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  (Right)
+SFFFFFFF
+FFFFFFFF
+FFFHFFFF
+FFFFFHFF
+FFFHFFFF
+FHHFFFHF
+FHFFHFHF
+FFFHFFF\setlength{\fboxsep}{0pt}\colorbox{ansi-red}{G\strut}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n}{pi\PYZus{}agent}\PY{o}{.}\PY{n}{print\PYZus{}table}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----+-----+-----State Value Mapping-----+-----+-----+
+|     |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |
+|-----+-----+-----+-----+-----+-----+-----+-----+-----|
+| 0   |1.000|1.000|1.000|1.000|1.000|1.000|1.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 1   |1.000|1.000|1.000|1.000|1.000|1.000|1.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 2   |1.000|0.978|0.926|0.000|0.857|0.946|0.982|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 3   |1.000|0.935|0.801|0.475|0.624|0.000|0.945|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 4   |1.000|0.826|0.542|0.000|0.539|0.611|0.852|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 5   |1.000|0.000|0.000|0.168|0.383|0.442|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 6   |1.000|0.000|0.195|0.121|0.000|0.332|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 7   |1.000|0.732|0.463|0.000|0.277|0.555|0.777|0.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
+
+    \end{Verbatim}
+
+    Congratulations! You have successfully implemented the policy iteration
+trainer (if and only if no error happens at the above cells). Few
+further problems for you to investigate:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the impact of the discount factor gamma?
+\item
+  What is the impact of the value function convergence criterion
+  epsilon?
+\end{enumerate}
+
+If you are interested in doing more investigation (not limited to these
+two), feel free to open new cells at the end of this notebook and left a
+clear trace of your thinking and coding, which leads to extra credit if
+you do a good job. It's an optional job, and you can ignore it.
+
+Now let's continue our journey!
+
+    \subsubsection{Section 2.2: Value
+Iteration}\label{section-2.2-value-iteration}
+
+Recall the idea of value iteration. We update the state value:
+
+\[v_{k+1}(s) = \max_a E_{s'} [r(s, a) + \gamma v_{k}(s')]\]
+
+wherein the \(s'\) is next state, \(r\) is the reward, \(v_{k}(s')\) is
+the next state value given by the old (not updated yet) value function.
+The expectation is computed among all possible transitions (given a
+state and action pair, it is possible to have many different next
+states, since the environment is not deterministic).
+
+The value iteration algorithm does not require an inner loop. It
+computes the expected return of all possible actions at a given state
+and uses the maximum of them as the state value. You can imagine it
+"pretends" we already have the optimal policy and run policy iteration
+based on it. Therefore we do not need to maintain a policy object in a
+trainer. We only need to retrieve the optimal policy using the same rule
+as policy iteration, given current value function.
+
+You should implement the trainer following the framework we already
+wrote for you. Please carefully go through the code and finish all
+\texttt{TODO} in it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+         
+         
+         \PY{k}{class} \PY{n+nc}{ValueIterationTrainer}\PY{p}{(}\PY{n}{PolicyItertaionTrainer}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Note that we inherate Policy Iteration Trainer, to resue the}
+         \PY{l+s+sd}{    code of update\PYZus{}policy(). It\PYZsq{}s same since it get optimal policy from}
+         \PY{l+s+sd}{    current state\PYZhy{}value table (self.table).}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake8x8\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{ValueIterationTrainer}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{gamma}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n}{env\PYZus{}name}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Conduct one iteration of learning.\PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{c+c1}{\PYZsh{} [TODO] value function may be need to be reset to zeros.}
+                 \PY{c+c1}{\PYZsh{} if you think it should, than do it. If not, then move on.}
+                 \PY{k}{pass}
+         
+                 \PY{c+c1}{\PYZsh{} In value iteration, we do not explicit require a}
+                 \PY{c+c1}{\PYZsh{} policy instance to run. We update value function}
+                 \PY{c+c1}{\PYZsh{} directly based on the transitions. Therefore, we}
+                 \PY{c+c1}{\PYZsh{} don\PYZsq{}t need to run self.update\PYZus{}policy() in each step.}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}value\PYZus{}function}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{update\PYZus{}value\PYZus{}function}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{old\PYZus{}table} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{state\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                     \PY{c+c1}{\PYZsh{} [TODO] what should be de right state value?}
+                     \PY{c+c1}{\PYZsh{} hint: try to compute the state\PYZus{}action\PYZus{}values first}
+                     \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{action\PYZus{}dim}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{transition\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}transitions}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{action}\PY{p}{)}
+                         \PY{n}{state\PYZus{}action\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}
+                         \PY{k}{for} \PY{n}{transition} \PY{o+ow}{in} \PY{n}{transition\PYZus{}list}\PY{p}{:}
+                             \PY{n}{prob} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{reward} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{next\PYZus{}state} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{next\PYZus{}state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{done} \PY{o}{=} \PY{n}{transition}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{done}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{state\PYZus{}action\PYZus{}value} \PY{o}{+}\PY{o}{=} \PY{n}{prob} \PY{o}{*} \PY{p}{(}\PY{n}{reward} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{*} \PY{n}{old\PYZus{}table}\PY{p}{[}\PY{n}{next\PYZus{}state}\PY{p}{]}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{state\PYZus{}action\PYZus{}value} \PY{o}{\PYZgt{}} \PY{n}{state\PYZus{}value}\PY{p}{:}
+                             \PY{n}{state\PYZus{}value} \PY{o}{=} \PY{n}{state\PYZus{}action\PYZus{}value}
+         
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{table}\PY{p}{[}\PY{n}{state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}value}
+         
+                 \PY{c+c1}{\PYZsh{} Till now the one step value update is finished.}
+                 \PY{c+c1}{\PYZsh{} You can see that we do not use a inner loop to update}
+                 \PY{c+c1}{\PYZsh{} the value function like what we did in policy iteration.}
+                 \PY{c+c1}{\PYZsh{} This is because to compute the state value, which is}
+                 \PY{c+c1}{\PYZsh{} a expectation among all possible action given by a}
+                 \PY{c+c1}{\PYZsh{} specified policy, we **pretend** already own the optimal}
+                 \PY{c+c1}{\PYZsh{} policy (the max operation).}
+         
+             \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Since in value itertaion we do not maintain a policy function,}
+         \PY{l+s+sd}{        so we need to retrieve it when we need it.\PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}policy}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{render}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Since in value itertaion we do not maintain a policy function,}
+         \PY{l+s+sd}{        so we need to retrieve it when we need it.\PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}policy}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{render}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Solve the TODOs and remove `pass`}
+         
+         \PY{c+c1}{\PYZsh{} Managing configurations of your experiments is important for your research.}
+         \PY{n}{default\PYZus{}vi\PYZus{}config} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{max\PYZus{}iteration}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,}
+             \PY{n}{evaluate\PYZus{}interval}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}  \PY{c+c1}{\PYZsh{} don\PYZsq{}t need to update policy each iteration}
+             \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,}
+             \PY{n}{eps}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}
+         \PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{value\PYZus{}iteration}\PY{p}{(}\PY{n}{train\PYZus{}config}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{config} \PY{o}{=} \PY{n}{default\PYZus{}vi\PYZus{}config}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{n}{train\PYZus{}config} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{config}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{train\PYZus{}config}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} [TODO] initialize Value Iteration Trainer. Remember to pass}
+             \PY{c+c1}{\PYZsh{}  config[\PYZsq{}gamma\PYZsq{}] to it.}
+             \PY{n}{trainer} \PY{o}{=} \PY{n}{ValueIterationTrainer}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{old\PYZus{}state\PYZus{}value\PYZus{}table} \PY{o}{=} \PY{n}{trainer}\PY{o}{.}\PY{n}{table}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             \PY{n}{old\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{n}{obs}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{obs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} train the agent}
+                 \PY{n}{trainer}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} [TODO] please uncomment this line}
+         
+                 \PY{c+c1}{\PYZsh{} evaluate the result}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{config}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{evaluate\PYZus{}interval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[INFO]}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{In }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ iteration, current }\PY{l+s+s2}{\PYZdq{}}
+                           \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mean episode reward is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                         \PY{n}{i}\PY{p}{,} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}
+                     \PY{p}{)}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} [TODO] compare the new policy with old policy to check should}
+                     \PY{c+c1}{\PYZsh{}  we stop.}
+                     \PY{c+c1}{\PYZsh{} [HINT] If new and old policy have same output given any}
+                     \PY{c+c1}{\PYZsh{}  observation, them we consider the algorithm is converged and}
+                     \PY{c+c1}{\PYZsh{}  should be stopped.}
+                     \PY{n}{new\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{obs}\PY{p}{:} \PY{n}{trainer}\PY{o}{.}\PY{n}{policy}\PY{p}{(}\PY{n}{obs}\PY{p}{)} \PY{k}{for} \PY{n}{obs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{obs\PYZus{}dim}\PY{p}{)}\PY{p}{\PYZcb{}}
+                     \PY{n}{should\PYZus{}stop} \PY{o}{=} \PY{p}{(}\PY{n}{new\PYZus{}policy\PYZus{}result}\PY{o}{==}\PY{n}{old\PYZus{}policy\PYZus{}result}\PY{p}{)}
+                     \PY{n}{old\PYZus{}policy\PYZus{}result} \PY{o}{=} \PY{n}{new\PYZus{}policy\PYZus{}result}
+                     \PY{c+c1}{\PYZsh{}equal\PYZus{}or\PYZus{}not = (np.fabs(trainer.table \PYZhy{} old\PYZus{}state\PYZus{}value\PYZus{}table) \PYZlt{}= config[\PYZsq{}eps\PYZsq{}])}
+                     \PY{c+c1}{\PYZsh{}old\PYZus{}state\PYZus{}value\PYZus{}table = trainer.table}
+                     \PY{c+c1}{\PYZsh{}should\PYZus{}stop = all(equal\PYZus{}or\PYZus{}not)}
+                     
+                     \PY{k}{if} \PY{n}{should\PYZus{}stop}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{We found policy is not changed anymore at }\PY{l+s+s2}{\PYZdq{}}
+                               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{itertaion }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Current mean episode reward }\PY{l+s+s2}{\PYZdq{}}
+                               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Stop training.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                         \PY{k}{break}
+         
+                     \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3000}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You sure your codes is OK? It shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t take so many }\PY{l+s+s2}{\PYZdq{}}
+                               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{) iterations to train a policy iteration }\PY{l+s+s2}{\PYZdq{}}
+                               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{agent.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                             \PY{n}{i}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{assert} \PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.8}\PY{p}{,} \PYZbs{}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{We expect to get the mean episode reward greater than 0.8. }\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{But you get: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. Please check your codes.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{trainer}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{trainer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n}{vi\PYZus{}agent} \PY{o}{=} \PY{n}{value\PYZus{}iteration}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO]	In 0 iteration, current mean episode reward is 0.0.
+[INFO]	In 100 iteration, current mean episode reward is 0.892.
+[INFO]	In 200 iteration, current mean episode reward is 0.867.
+[INFO]	In 300 iteration, current mean episode reward is 0.867.
+[INFO]	In 400 iteration, current mean episode reward is 0.867.
+[INFO]	In 500 iteration, current mean episode reward is 0.867.
+We found policy is not changed anymore at itertaion 500. Current mean episode reward is 0.867. Stop training.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Your value iteration agent achieve }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ mean episode reward. The optimal score }\PY{l+s+s2}{\PYZdq{}}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should be almost }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{vi\PYZus{}agent}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.86}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your value iteration agent achieve 0.867 mean episode reward. The optimal score should be almost 0.86.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n}{vi\PYZus{}agent}\PY{o}{.}\PY{n}{render}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  (Right)
+SFFFFFFF
+FFFFFFFF
+FFFHFFFF
+FFFFFHFF
+FFFHFFFF
+FHHFFFHF
+FHFFHFHF
+FFFHFFF\setlength{\fboxsep}{0pt}\colorbox{ansi-red}{G\strut}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Run this cell without modification}
+         
+         \PY{n}{vi\PYZus{}agent}\PY{o}{.}\PY{n}{print\PYZus{}table}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----+-----+-----State Value Mapping-----+-----+-----+
+|     |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |
+|-----+-----+-----+-----+-----+-----+-----+-----+-----|
+| 0   |0.999|0.999|0.999|0.999|0.999|0.999|0.999|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 1   |0.999|0.999|0.999|0.999|0.999|0.999|0.999|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 2   |0.998|0.976|0.925|0.000|0.856|0.945|0.981|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 3   |0.997|0.932|0.799|0.474|0.623|0.000|0.944|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 4   |0.997|0.823|0.541|0.000|0.539|0.611|0.851|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 5   |0.996|0.000|0.000|0.168|0.383|0.442|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 6   |0.996|0.000|0.194|0.121|0.000|0.332|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 7   |0.996|0.728|0.461|0.000|0.277|0.555|0.777|0.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
+
+    \end{Verbatim}
+
+    Congratulation! You have successfully implemented the value iteration
+trainer (if and only if no error happens at the above cells). Few
+further problems for you to investigate:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Do you see that some iteration during training yields better rewards
+  than the final one? Why does that happen?
+\item
+  What is the impact of the discount factor gamma?
+\item
+  What is the impact of the value function convergence criterion
+  epsilon?
+\end{enumerate}
+
+If you are interested in doing more investigation (not limited to these
+two), feel free to open new cells at the end of this notebook and left a
+clear trace of your thinking and coding, which leads to extra credit if
+you do a good job. It's an optional job, and you can ignore it.
+
+Now let's continue our journey!
+
+    \subsubsection{Section 2.3: Compare two model-based
+agents}\label{section-2.3-compare-two-model-based-agents}
+
+Now we have two agents: \texttt{pi\_agent} and \texttt{vi\_agent}. They
+are believed to be the optimal policy in this environment. Can you
+compare the policy of two of them and use a clean and clear description
+or figures to show your conclusion?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Solve the TODO and remove `pass`}
+         
+         \PY{c+c1}{\PYZsh{} [TODO] try to compare two trained agents\PYZsq{} policies}
+         \PY{c+c1}{\PYZsh{} hint: trainer.print\PYZus{}table() may give you a better sense.}
+         \PY{n}{pi\PYZus{}agent}\PY{o}{.}\PY{n}{print\PYZus{}table}\PY{p}{(}\PY{p}{)}
+         \PY{n}{vi\PYZus{}agent}\PY{o}{.}\PY{n}{print\PYZus{}table}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-----+-----+-----State Value Mapping-----+-----+-----+
+|     |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |
+|-----+-----+-----+-----+-----+-----+-----+-----+-----|
+| 0   |1.000|1.000|1.000|1.000|1.000|1.000|1.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 1   |1.000|1.000|1.000|1.000|1.000|1.000|1.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 2   |1.000|0.978|0.926|0.000|0.857|0.946|0.982|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 3   |1.000|0.935|0.801|0.475|0.624|0.000|0.945|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 4   |1.000|0.826|0.542|0.000|0.539|0.611|0.852|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 5   |1.000|0.000|0.000|0.168|0.383|0.442|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 6   |1.000|0.000|0.195|0.121|0.000|0.332|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 7   |1.000|0.732|0.463|0.000|0.277|0.555|0.777|0.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
++-----+-----+-----State Value Mapping-----+-----+-----+
+|     |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |
+|-----+-----+-----+-----+-----+-----+-----+-----+-----|
+| 0   |0.999|0.999|0.999|0.999|0.999|0.999|0.999|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 1   |0.999|0.999|0.999|0.999|0.999|0.999|0.999|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 2   |0.998|0.976|0.925|0.000|0.856|0.945|0.981|0.999|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 3   |0.997|0.932|0.799|0.474|0.623|0.000|0.944|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 4   |0.997|0.823|0.541|0.000|0.539|0.611|0.851|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 5   |0.996|0.000|0.000|0.168|0.383|0.442|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 6   |0.996|0.000|0.194|0.121|0.000|0.332|0.000|1.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 7   |0.996|0.728|0.461|0.000|0.277|0.555|0.777|0.000|
+|     |     |     |     |     |     |     |     |     |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} You can do more inverstigation here if you wish. Leave it blank if you don\PYZsq{}t.}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Conclusion and Discussion}\label{conclusion-and-discussion}
+
+In this assignment, we learn how to use Gym package, how to use Object
+Oriented Programming idea to build a basic tabular RL algorithm.
+
+It's OK to leave the following cells empty. In the next markdown cell,
+you can write whatever you like. Like the suggestion on the course, the
+confusing problems in the assignments, and so on.
+
+If you want to do more investigation, feel free to open new cells via
+\texttt{Esc\ +\ B} after the next cells and write codes in it, so that
+you can reuse some result in this notebook. Remember to write sufficient
+comments and documents to let others know what you are doing.
+
+Following the submission instruction in the assignment to submit your
+assignment to our staff. Thank you!
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    ...
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
